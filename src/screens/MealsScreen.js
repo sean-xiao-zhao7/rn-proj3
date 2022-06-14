@@ -14,6 +14,10 @@ const MealsScreen = (props) => {
                         <MealPreview
                             title={item.item.title}
                             id={item.item.id}
+                            imageUrl={item.item.imageUrl}
+                            duration={item.item.duration}
+                            affordability={item.item.affordability}
+                            complexity={item.item.complexity}
                         />
                     ) : null
                 }

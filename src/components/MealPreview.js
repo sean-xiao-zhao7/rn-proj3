@@ -1,4 +1,4 @@
-import { Text, Pressable, StyleSheet } from "react-native";
+import { Text, Pressable, StyleSheet, View, Image } from "react-native";
 
 const MealPreview = (props) => {
     const onPressHandler = () => {};
@@ -11,7 +11,20 @@ const MealPreview = (props) => {
             ]}
             android_ripple={{ color: "#f9eca9" }}
         >
+            <View>
+                <Image
+                    source={{
+                        uri: props.imageUrl,
+                    }}
+                    style={{ width: "30%", height: 200, marginBottom: 30 }}
+                />
+            </View>
             <Text>{props.title}</Text>
+            <View>
+                <Text>{props.duration}</Text>
+                <Text>{props.complexity}</Text>
+                <Text>{props.affordability}</Text>
+            </View>
         </Pressable>
     );
 };
