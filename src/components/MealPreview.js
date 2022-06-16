@@ -1,7 +1,11 @@
 import { Text, Pressable, StyleSheet, View, Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const MealPreview = (props) => {
-    const onPressHandler = () => {};
+    const navigation = useNavigation();
+    const onPressHandler = () => {
+        navigation.navigate("MealDetailsScreen", { id: props.id });
+    };
     return (
         <Pressable
             onPress={onPressHandler}
@@ -19,7 +23,9 @@ const MealPreview = (props) => {
                     style={{ width: "30%", height: 200, marginBottom: 30 }}
                 />
             </View>
-            <Text>{props.title}</Text>
+            <Text>
+                {props.title} of {navigation.category}
+            </Text>
             <View>
                 <Text>{props.duration}</Text>
                 <Text>{props.complexity}</Text>

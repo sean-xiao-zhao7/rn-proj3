@@ -1,11 +1,36 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StyleSheet, SafeAreaView, StatusBar } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import CategoriesScreen from "./src/screens/CategoriesScreen";
 import MealsScreen from "./src/screens/MealsScreen";
+import MealDetailsScreen from "./src/screens/MealDetailsScreen";
+import FavoritesScreen from "./src/screens/FavoritesScreen";
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const DrawerNavigator = () => {
+    return (
+        <Drawer.Navigator>
+            <Drawer.Screen
+                name="CategoriesScreen"
+                component={CategoriesScreen}
+                options={{
+                    title: "Meals Categories",
+                }}
+            />
+            <Drawer.Screen
+                name="FavoritesScreen"
+                component={FavoritesScreen}
+                options={{
+                    title: "Your Favorites",
+                }}
+            />
+        </Drawer.Navigator>
+    );
+};
 
 export default function App() {
     return (
@@ -14,13 +39,18 @@ export default function App() {
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen
-                        name="CategoriesScreen"
-                        component={CategoriesScreen}
-                        options={{
-                            title: "Choose your meal",
-                        }}
+                        name="Drawer"
+                        component={DrawerNavigator}
+                        options={{ headerShown: false }}
                     />
                     <Stack.Screen name="MealsScreen" component={MealsScreen} />
+                    <Stack.Screen
+                        name="MealDetailsScreen"
+                        component={MealDetailsScreen}
+                        options={{
+                            title: "Meal Details",
+                        }}
+                    />
                 </Stack.Navigator>
             </NavigationContainer>
         </SafeAreaView>

@@ -1,9 +1,18 @@
 import { View, FlatList } from "react-native";
 
-import { MEALS } from "../data/dummy-data";
+import { MEALS, CATEGORIES } from "../data/dummy-data";
 import MealPreview from "../components/MealPreview";
+import { useLayoutEffect } from "react";
 
 const MealsScreen = (props) => {
+    useLayoutEffect(() => {
+        props.navigation.setOptions({
+            title: `${
+                CATEGORIES.find((c) => c.id === props.route.params.id).title
+            } meals`,
+        });
+    }, [props.navigation, props.route.params.id]);
+
     return (
         <View>
             <FlatList
