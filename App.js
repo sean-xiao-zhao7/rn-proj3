@@ -2,12 +2,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StyleSheet, SafeAreaView, StatusBar } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { Provider } from "react-redux";
 
 import CategoriesScreen from "./src/screens/CategoriesScreen";
 import MealsScreen from "./src/screens/MealsScreen";
 import MealDetailsScreen from "./src/screens/MealDetailsScreen";
 import FavoritesScreen from "./src/screens/FavoritesScreen";
-import FavoritesContextProvider from "./src/store/context/favorites-context";
+import { store } from "./src/store/redux/store";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -37,7 +38,7 @@ export default function App() {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle={"light-content"} />
-            <FavoritesContextProvider>
+            <Provider store={store}>
                 <NavigationContainer>
                     <Stack.Navigator>
                         <Stack.Screen
@@ -58,7 +59,7 @@ export default function App() {
                         />
                     </Stack.Navigator>
                 </NavigationContainer>
-            </FavoritesContextProvider>
+            </Provider>
         </SafeAreaView>
     );
 }

@@ -1,21 +1,25 @@
 const { View, Text, Image } = require("react-native");
-import { useContext, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { MEALS } from "../data/dummy-data";
-import { FavoritesContext } from "../store/context/favorites-context";
 import IconButton from "../components/IconButton";
+import {
+    removeFromFavorite,
+    addToFavorite,
+} from "../store/redux/favoritesSlice";
 
 const MealDetailsScreen = (props) => {
-    const favoriteContext = useContext(FavoritesContext);
-
     const meal = MEALS.find((m) => props.route.params.id === m.id);
-    const isFavorite = favoriteContext.ids.includes(props.route.params.id);
+    const dispatch = useDispatch();
+    const ids = useSelector((state) => state.favoritesReducer.ids);
+    const isFavorite = ids.includes(props.route.params.id);
 
     const favoriteHandler = () => {
         if (isFavorite) {
-            favoriteContext.removeFromFavorite(props.route.params.id);
+            dispatch(removeFromFavorite({ id: props.route.params.id }));
         } else {
-            favoriteContext.addToFavorite(props.route.params.id);
+            dispatch(addToFavorite({ id: props.route.params.id }));
         }
     };
 

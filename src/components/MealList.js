@@ -1,12 +1,11 @@
-import { useContext } from "react";
 import { FlatList } from "react-native";
+import { useSelector } from "react-redux";
 
 import { MEALS } from "../data/dummy-data";
 import MealPreview from "../components/MealPreview";
-import { FavoritesContext } from "../store/context/favorites-context";
 
 const MealList = (props) => {
-    const favoritesContext = useContext(FavoritesContext);
+    const favoriteIds = useSelector((state) => state.favoritesReducer.ids);
 
     return (
         <FlatList
@@ -29,7 +28,7 @@ const MealList = (props) => {
                     return mealPreview;
                 } else if (
                     props.condition === "favorite" &&
-                    favoritesContext.ids.includes(item.item.id)
+                    favoriteIds.includes(item.item.id)
                 ) {
                     return mealPreview;
                 }

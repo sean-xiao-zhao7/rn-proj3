@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 
 import { CATEGORIES } from "../data/dummy-data";
 import Category from "../components/Category";
@@ -9,7 +9,6 @@ const CategoriesScreen = (props) => {
     };
     return (
         <View>
-            {/* <Text>CategoriesScreen</Text> */}
             <FlatList
                 data={CATEGORIES}
                 renderItem={(item) => (
