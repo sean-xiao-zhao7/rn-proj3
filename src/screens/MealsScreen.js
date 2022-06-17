@@ -1,8 +1,8 @@
-import { View, FlatList } from "react-native";
+import { View } from "react-native";
 
-import { MEALS, CATEGORIES } from "../data/dummy-data";
-import MealPreview from "../components/MealPreview";
+import { CATEGORIES } from "../data/dummy-data";
 import { useLayoutEffect } from "react";
+import MealList from "../components/MealList";
 
 const MealsScreen = (props) => {
     useLayoutEffect(() => {
@@ -15,22 +15,7 @@ const MealsScreen = (props) => {
 
     return (
         <View>
-            <FlatList
-                data={MEALS}
-                renderItem={(item) =>
-                    item.item.categoryIds.indexOf(props.route.params.id) >=
-                    0 ? (
-                        <MealPreview
-                            title={item.item.title}
-                            id={item.item.id}
-                            imageUrl={item.item.imageUrl}
-                            duration={item.item.duration}
-                            affordability={item.item.affordability}
-                            complexity={item.item.complexity}
-                        />
-                    ) : null
-                }
-            />
+            <MealList condition="category" id={props.route.params.id} />
         </View>
     );
 };

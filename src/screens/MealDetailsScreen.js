@@ -1,13 +1,23 @@
 const { View, Text, Image } = require("react-native");
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 
 import { MEALS } from "../data/dummy-data";
+import { FavoritesContext } from "../store/context/favorites-context";
 import IconButton from "../components/IconButton";
 
 const MealDetailsScreen = (props) => {
-    const meal = MEALS.find((m) => props.route.params.id === m.id);
+    const favoriteContext = useContext(FavoritesContext);
 
-    const handler = () => {};
+    const meal = MEALS.find((m) => props.route.params.id === m.id);
+    const isFavorite = favoriteContext.ids.includes(props.route.params.id);
+
+    const favoriteHandler = () => {
+        if (isFavorite) {
+            favoriteContext.removeFromFavorite(props.route.params.id);
+        } else {
+            favoriteContext.addToFavorite(props.route.params.id);
+        }
+    };
 
     useLayoutEffect(() => {
         props.navigation.setOptions({
@@ -15,14 +25,14 @@ const MealDetailsScreen = (props) => {
                 return (
                     <IconButton
                         title={"asdfas"}
-                        handler={handler}
-                        color="black"
+                        handler={favoriteHandler}
+                        color={isFavorite ? "yellow" : "black"}
                         size={32}
                     />
                 );
             },
         });
-    }, [props.navigation, handler]);
+    }, [props.navigation, favoriteHandler, isFavorite]);
 
     return (
         <View>

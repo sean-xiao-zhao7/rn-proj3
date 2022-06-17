@@ -7,6 +7,7 @@ import CategoriesScreen from "./src/screens/CategoriesScreen";
 import MealsScreen from "./src/screens/MealsScreen";
 import MealDetailsScreen from "./src/screens/MealDetailsScreen";
 import FavoritesScreen from "./src/screens/FavoritesScreen";
+import FavoritesContextProvider from "./src/store/context/favorites-context";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -36,23 +37,28 @@ export default function App() {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle={"light-content"} />
-            <NavigationContainer>
-                <Stack.Navigator>
-                    <Stack.Screen
-                        name="Drawer"
-                        component={DrawerNavigator}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen name="MealsScreen" component={MealsScreen} />
-                    <Stack.Screen
-                        name="MealDetailsScreen"
-                        component={MealDetailsScreen}
-                        options={{
-                            title: "Meal Details",
-                        }}
-                    />
-                </Stack.Navigator>
-            </NavigationContainer>
+            <FavoritesContextProvider>
+                <NavigationContainer>
+                    <Stack.Navigator>
+                        <Stack.Screen
+                            name="Drawer"
+                            component={DrawerNavigator}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="MealsScreen"
+                            component={MealsScreen}
+                        />
+                        <Stack.Screen
+                            name="MealDetailsScreen"
+                            component={MealDetailsScreen}
+                            options={{
+                                title: "Meal Details",
+                            }}
+                        />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </FavoritesContextProvider>
         </SafeAreaView>
     );
 }
@@ -60,7 +66,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
+        paddingVertical: 20,
         backgroundColor: "#254dc3",
     },
 });

@@ -1,9 +1,11 @@
-const { View, Text, Image } = require("react-native");
+const { View } = require("react-native");
+
+import MealList from "../components/MealList";
 
 const FavoritesScreen = (props) => {
     return (
         <View>
-            <Text>Your favorites</Text>
+            <MealList condition={"favorite"} />
         </View>
     );
 };
