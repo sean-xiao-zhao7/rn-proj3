@@ -1,4 +1,4 @@
-const { View } = require("react-native");
+import { View } from "react-native";
 
 import MealList from "../components/MealList";
 
